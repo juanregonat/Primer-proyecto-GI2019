@@ -1,0 +1,1564 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/26/2019 2:48:59 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HP240G3-JUAN"
+  DTS:CreatorName="HP240G3-JUAN\Juan"
+  DTS:DTSID="{22561F77-F70F-4739-ACB3-D5DBE09EA1B7}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.101"
+  DTS:LocaleID="3082"
+  DTS:ObjectName="Package3"
+  DTS:PackageType="5"
+  DTS:VersionBuild="18"
+  DTS:VersionGUID="{3E8F1DF5-6EB9-4250-9525-4DC5A7D3CD0F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[.\sqlexpress.GI2019]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DB9C2F9F-1F85-4843-A376-3610EE8F14C7}"
+      DTS:ObjectName=".\sqlexpress.GI2019">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.\sqlexpress;Initial Catalog=GI2019;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HP240G3-JUAN.GI2019]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+      DTS:ObjectName="HP240G3-JUAN.GI2019">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=HP240G3-JUAN;Initial Catalog=GI2019;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Contenedor de secuencias"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Contenedor de secuencias"
+      DTS:DTSID="{19208DFA-6EB9-45BB-B336-7B7E3759AC4B}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Contenedor de secuencias">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\Dim Tipo Norm"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{E791FF0F-3E50-48C3-9098-C03CF61FE695}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Dim Tipo Norm"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="4">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="insert into DimTipoNormalizacion (tipoNormalizacion)&#xA;select distinct [Tipo de Normalización] &#xA;FROM [GI2019].[dbo].[Datos limpios]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DimCreoGI"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{3ff06121-e80e-49f7-a375-fd24e16504af}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimCreoGI"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="insert into DimCreoGI(legajos)&#xA; select distinct [Creó GI]&#xA;  FROM [GI2019].[dbo].[Datos limpios]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DimEstaciones"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{5311C1B9-F6E3-4633-B710-96DE3BC1D193}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimEstaciones"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="8">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="insert into DimEstacion(estaciones)&#xA; select distinct [Estación]&#xA;  FROM [GI2019].[dbo].[Datos limpios]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DimEstados"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{1A59DADF-6540-4290-BC11-11EE0B1327E4}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimEstados"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="6">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="/****** carga datos dimensiones  ******/&#xA;insert into DimEstados (estados)&#xA;&#x9;select distinct [Estado]&#xA;  FROM [GI2019].[dbo].[Datos limpios]&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DimLegFinalizo"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{e54ed44c-ecb4-429b-a0ee-7505a16ac5fb}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimLegFinalizo"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="insert into DimLegFinalizo (legajos)&#xA; select distinct [Finalizó]&#xA;  FROM [GI2019].[dbo].[Datos limpios]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DimLegNormalizo"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{26f756be-f223-4c0a-b03a-5073a57fd1f1}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimLegNormalizo"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="10">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="insert into DimLegNormalizo (legajos)&#xA; select distinct [Normalizado por]&#xA;  FROM [GI2019].[dbo].[Datos limpios]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DimLegNotificado"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{30f19f12-91c4-4d31-8048-a2c7675bad70}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimLegNotificado"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="5">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="insert into DimLegNotificado(legajos)&#xA; select distinct [Se Notificó]&#xA;  FROM [GI2019].[dbo].[Datos limpios]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DimLegReclamo"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{937cadf2-cfd8-45d4-a00b-d75f5e922903}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimLegReclamo"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="3">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="insert into DimLegReclamo(legajos)&#xA; select distinct [Reclamó]&#xA;  FROM [GI2019].[dbo].[Datos limpios]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DimLocal"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{9f2b80bc-2f3d-4cf0-8806-c1ccf8ea38c8}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimLocal"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="7">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="insert into DimLocal (locales)&#xA; select distinct [Local]&#xA;  FROM [GI2019].[dbo].[Datos limpios]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DimLugares"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{a57d0f8a-6486-4fa6-8a48-fe3cf81e519b}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimLugares"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="insert into DimLugar(lugares)&#xA; select distinct [Lugar]&#xA;  FROM [GI2019].[dbo].[Datos limpios]&#xA;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Contenedor de secuencias\DimRubros"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{1f9244bb-d0e9-4887-88b1-09d3cf214701}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DimRubros"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="9">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="insert into DimRubro (rubros)&#xA; select distinct [Rubro]&#xA;  FROM [GI2019].[dbo].[Datos limpios]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Limpiar tablas"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:DTSID="{351EA008-F420-4017-AB4E-8AE9E18C4B46}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Limpiar tablas"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+          SQLTask:SqlStatementSource="Truncate table dimEstados;&#xA;Truncate table dimLugar;&#xA;Truncate table dimEstacion;&#xA;Truncate table dimLocal;&#xA;Truncate table dimRubro;&#xA;Truncate table dimCreoGI;&#xA;Truncate table dimLegFinalizo;&#xA;Truncate table dimLegNotificado;&#xA;Truncate table dimLegReclamo;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Tabla datos normalizados"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Contenedor de secuencias"
+      DTS:DTSID="{DC669DA5-6DB2-4C7B-AEFF-D1C21F84F3E3}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Tabla datos normalizados">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Tabla datos normalizados\Tarea Ejecutar SQL"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Tarea Ejecutar SQL"
+          DTS:DTSID="{2345C832-0372-4175-8E4C-E2AEB6B9918A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Tarea Ejecutar SQL"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{73F3E012-968E-46C8-B338-F7C676DDB3F7}"
+              SQLTask:SqlStatementSource="Truncate table [Datos Normalizados]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Tabla datos normalizados\Tarea Flujo de datos"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Tarea Flujo de datos"
+          DTS:DTSID="{51A20FFE-DC88-4691-9E24-4C4F4CC9D779}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Tarea Flujo de datos"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="Destino de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+                  description="Destino de OLE DB"
+                  name="Destino de OLE DB"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset">[Datos Normalizados]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si los valores proporcionados para columnas de identidad se van a copiar al destino. Si es False, los valores de las columnas de identidad se generan automáticamente en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indica si las columnas que contienen NULL tendrán NULL insertado en el destino. Si es False, las columnas que contienen NULL tendrán sus valores predeterminados insertados en el destino. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica opciones para usar con la carga rápida. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica cuándo se emiten confirmaciones durante la inserción de datos. El valor 0 especifica que se emitirá una confirmación al final de la inserción de datos. Solo se aplica si está activada la carga rápida."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[HP240G3-JUAN.GI2019]"
+                      connectionManagerRefId="Package.ConnectionManagers[HP240G3-JUAN.GI2019]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                      errorOrTruncationOperation="Insertar"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="Entrada de destino de OLE DB">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[ID]"
+                          cachedDataType="i4"
+                          cachedName="ID"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Evento]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="Evento"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Evento]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Evento]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Fecha de Creación]"
+                          cachedDataType="dbDate"
+                          cachedName="Fecha de Creación"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha de Creación]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Creación]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Detalle del Reclamo]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Detalle del Reclamo"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Detalle del Reclamo]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Detalle del Reclamo]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Observación GI]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Observación GI"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Observación GI]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Observación GI]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Reclamó]"
+                          cachedDataType="i4"
+                          cachedName="Reclamó"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Reclamó]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Reclamó]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Fecha de Notificación]"
+                          cachedDataType="dbDate"
+                          cachedName="Fecha de Notificación"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha de Notificación]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Notificación]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Fecha de Normalizado]"
+                          cachedDataType="dbDate"
+                          cachedName="Fecha de Normalizado"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha de Normalizado]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Normalizado]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Observación de Normalización]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Observación de Normalización"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Observación de Normalización]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Observación de Normalización]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Fecha de Finalización]"
+                          cachedDataType="dbDate"
+                          cachedName="Fecha de Finalización"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha de Finalización]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Finalización]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Observación de Finalización]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Observación de Finalización"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Observación de Finalización]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Observación de Finalización]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Estados id]"
+                          cachedDataType="i4"
+                          cachedName="Estados id"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Estados id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Estados id]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Lugar id]"
+                          cachedDataType="i4"
+                          cachedName="Lugar id"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Lugar id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Lugar id]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Estacion id]"
+                          cachedDataType="i4"
+                          cachedName="Estacion id"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Estacion id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Estacion id]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Hora Creacion]"
+                          cachedDataType="dbTime2"
+                          cachedName="Hora Creacion"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Hora Creacion]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora Creacion]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Local Id]"
+                          cachedDataType="i4"
+                          cachedName="Local Id"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Local Id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Local Id]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Rubro Id]"
+                          cachedDataType="i4"
+                          cachedName="Rubro Id"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Rubro Id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Rubro Id]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Creo Id]"
+                          cachedDataType="i4"
+                          cachedName="Creo Id"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Creo Id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Creo Id]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Se notificó]"
+                          cachedDataType="i4"
+                          cachedName="Se notificó"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Se notificó]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Se notificó]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Hora Notificacion]"
+                          cachedDataType="dbTime2"
+                          cachedName="Hora Notificacion"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Hora Notificacion]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora Notificacion]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Normalizo id]"
+                          cachedDataType="i4"
+                          cachedName="Normalizo id"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Normalizo id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Normalizo id]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Hora Normalizacion]"
+                          cachedDataType="dbTime2"
+                          cachedName="Hora Normalizacion"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Hora Normalizacion]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora Normalizacion]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Tipo Norm id]"
+                          cachedDataType="i4"
+                          cachedName="Tipo Norm id"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tipo Norm id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Tipo Norm id]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Finalizó Id]"
+                          cachedDataType="i4"
+                          cachedName="Finalizó Id"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Finalizó Id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Finalizó Id]" />
+                        <inputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].Columns[Hora final]"
+                          cachedDataType="dbTime2"
+                          cachedName="Hora final"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Hora final]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora final]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[ID]"
+                          dataType="i4"
+                          name="ID" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Evento]"
+                          dataType="wstr"
+                          length="10"
+                          name="Evento" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha de Creación]"
+                          dataType="dbDate"
+                          name="Fecha de Creación" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Detalle del Reclamo]"
+                          dataType="wstr"
+                          length="255"
+                          name="Detalle del Reclamo" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Observación GI]"
+                          dataType="wstr"
+                          length="255"
+                          name="Observación GI" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Reclamó]"
+                          dataType="i4"
+                          name="Reclamó" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha de Notificación]"
+                          dataType="dbDate"
+                          name="Fecha de Notificación" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha de Normalizado]"
+                          dataType="dbDate"
+                          name="Fecha de Normalizado" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Observación de Normalización]"
+                          dataType="wstr"
+                          length="255"
+                          name="Observación de Normalización" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Fecha de Finalización]"
+                          dataType="dbDate"
+                          name="Fecha de Finalización" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Observación de Finalización]"
+                          dataType="wstr"
+                          length="255"
+                          name="Observación de Finalización" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Estados id]"
+                          dataType="i4"
+                          name="Estados id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Lugar id]"
+                          dataType="i4"
+                          name="Lugar id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Estacion id]"
+                          dataType="i4"
+                          name="Estacion id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Hora Creacion]"
+                          dataType="dbTime2"
+                          name="Hora Creacion" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Local Id]"
+                          dataType="i4"
+                          name="Local Id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Rubro Id]"
+                          dataType="i4"
+                          name="Rubro Id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Creo Id]"
+                          dataType="i4"
+                          name="Creo Id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Se notificó]"
+                          dataType="i4"
+                          name="Se notificó" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Hora Notificacion]"
+                          dataType="dbTime2"
+                          name="Hora Notificacion" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Normalizo id]"
+                          dataType="i4"
+                          name="Normalizo id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Hora Normalizacion]"
+                          dataType="dbTime2"
+                          name="Hora Normalizacion" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Tipo Norm id]"
+                          dataType="i4"
+                          name="Tipo Norm id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Finalizó Id]"
+                          dataType="i4"
+                          name="Finalizó Id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB].ExternalColumns[Hora final]"
+                          dataType="dbTime2"
+                          name="Hora final" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Salida de error de destino de OLE DB"
+                      synchronousInputId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Outputs[Salida de error de destino de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="Origen de OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;7"
+                  description="Origen de OLE DB"
+                  name="Origen de OLE DB"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowset">[dbo].[Datos limpios]</property>
+                    <property
+                      dataType="System.String"
+                      description="Especifica la variable que contiene el nombre del objeto de base de datos usado para abrir un conjunto de filas."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="Comando SQL para ejecutar."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Select 
+[Datos limpios].ID, 
+[Datos limpios].Evento, 
+[DimEstados].id [Estados id], 
+[DimLugar].id [Lugar id],
+[DimEstacion].id [Estacion id], 
+[Datos limpios].[Fecha de Creación], 
+CONVERT(time(0),[Datos limpios].[Hora de Creación]) [Hora Creacion], 
+[DimLocal].id [Local Id],
+[DimRubro].id [Rubro Id],
+[Datos limpios].[Detalle del Reclamo],
+[Datos limpios].[Observación GI], 
+[DimCreoGI].id [Creo Id], 
+[DimLegReclamo].id [Reclamó],
+[DimLegNotificado].id [Se notificó],
+[Datos limpios].[Fecha de Notificación], 
+CONVERT(time(0),[Datos limpios].[Hora de Notificación]) [Hora Notificacion],
+[DimLegNormalizo].id [Normalizo id],
+[Datos limpios].[Fecha de Normalizado], 
+CONVERT(time(0),[Datos limpios].[Hora de Normalizado]) [Hora Normalizacion],
+[DimTipoNormalizacion].Id [Tipo Norm id],
+[Datos limpios].[Observación de Normalización], 
+[DimLegFinalizo].id [Finalizó Id],
+[Datos limpios].[Fecha de Finalización], 
+CONVERT(time(0),[Datos limpios].[Hora de Finalizaciòn]) [Hora final],
+[Datos limpios].[Observación de Finalización]
+from [Datos limpios]
+	inner join DimCreoGI			on DimCreoGI.legajos		=	[Datos limpios].[Creó GI] 
+	inner join DimEstados			on DimEstados.estados		=	[Datos limpios].[Estado]
+	inner join DimLugar				on DimLugar.lugares			=	[Datos limpios].[Lugar]
+	inner join DimEstacion			on DimEstacion.estaciones	=	[Datos limpios].[Estación]
+	inner join DimLocal				on DimLocal.locales			=	[Datos limpios].[Local]
+	inner join DimRubro				on DimRubro.rubros			=	[Datos limpios].[Rubro]
+	inner join DimLegReclamo		on DimLegReclamo.legajos	=	[Datos limpios].[Reclamó]
+	inner join DimLegNotificado		on DimLegNotificado.legajos =	[Datos limpios].[Se Notificó]
+	inner join DimLegNormalizo		on DimLegNormalizo.legajos =	[Datos limpios].[Normalizado por]
+	inner join DimLegFinalizo		on DimLegFinalizo.legajos	=	[Datos limpios].[Finalizó]
+	inner join DimTipoNormalizacion on DimTipoNormalizacion.tipoNormalizacion	= [Datos limpios].[Tipo de Normalización]</property>
+                    <property
+                      dataType="System.String"
+                      description="Variable que contiene el comando SQL para ejecutar."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica la página de códigos de columna para utilizar cuando la información de página de códigos no está disponible en el origen de datos."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Fuerza el uso del valor de la propiedad DefaultCodePage al describir datos de caracteres."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Especifica el modo utilizado para obtener acceso a la base de datos."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="Asignaciones entre los parámetros del comando SQL y las variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[HP240G3-JUAN.GI2019]"
+                      connectionManagerRefId="Package.ConnectionManagers[HP240G3-JUAN.GI2019]"
+                      description="La conexión de tiempo de ejecución OLE DB usada para obtener acceso a la base de datos."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB]"
+                      name="Salida de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[ID]"
+                          name="ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Evento]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Evento]"
+                          length="10"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Evento]"
+                          name="Evento"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Creación]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha de Creación]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Creación]"
+                          name="Fecha de Creación"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Detalle del Reclamo]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Detalle del Reclamo]"
+                          length="255"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Detalle del Reclamo]"
+                          name="Detalle del Reclamo"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Observación GI]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Observación GI]"
+                          length="255"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Observación GI]"
+                          name="Observación GI"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Reclamó]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Reclamó]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Reclamó]"
+                          name="Reclamó"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Notificación]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha de Notificación]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Notificación]"
+                          name="Fecha de Notificación"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Normalizado]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha de Normalizado]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Normalizado]"
+                          name="Fecha de Normalizado"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Observación de Normalización]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Observación de Normalización]"
+                          length="255"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Observación de Normalización]"
+                          name="Observación de Normalización"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Finalización]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha de Finalización]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Fecha de Finalización]"
+                          name="Fecha de Finalización"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Observación de Finalización]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Observación de Finalización]"
+                          length="255"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Observación de Finalización]"
+                          name="Observación de Finalización"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Estados id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Estados id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Estados id]"
+                          name="Estados id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Lugar id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Lugar id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Lugar id]"
+                          name="Lugar id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Estacion id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Estacion id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Estacion id]"
+                          name="Estacion id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora Creacion]"
+                          dataType="dbTime2"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Hora Creacion]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora Creacion]"
+                          name="Hora Creacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Local Id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Local Id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Local Id]"
+                          name="Local Id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Rubro Id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Rubro Id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Rubro Id]"
+                          name="Rubro Id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Creo Id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Creo Id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Creo Id]"
+                          name="Creo Id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Se notificó]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Se notificó]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Se notificó]"
+                          name="Se notificó"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora Notificacion]"
+                          dataType="dbTime2"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Hora Notificacion]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora Notificacion]"
+                          name="Hora Notificacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Normalizo id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Normalizo id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Normalizo id]"
+                          name="Normalizo id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora Normalizacion]"
+                          dataType="dbTime2"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Hora Normalizacion]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora Normalizacion]"
+                          name="Hora Normalizacion"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Tipo Norm id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Tipo Norm id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Tipo Norm id]"
+                          name="Tipo Norm id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Finalizó Id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Finalizó Id]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Finalizó Id]"
+                          name="Finalizó Id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora final]"
+                          dataType="dbTime2"
+                          errorOrTruncationOperation="Conversión"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Hora final]"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].Columns[Hora final]"
+                          name="Hora final"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[ID]"
+                          dataType="i4"
+                          name="ID" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Evento]"
+                          dataType="wstr"
+                          length="10"
+                          name="Evento" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha de Creación]"
+                          dataType="dbDate"
+                          name="Fecha de Creación" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Detalle del Reclamo]"
+                          dataType="wstr"
+                          length="255"
+                          name="Detalle del Reclamo" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Observación GI]"
+                          dataType="wstr"
+                          length="255"
+                          name="Observación GI" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Reclamó]"
+                          dataType="i4"
+                          name="Reclamó" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha de Notificación]"
+                          dataType="dbDate"
+                          name="Fecha de Notificación" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha de Normalizado]"
+                          dataType="dbDate"
+                          name="Fecha de Normalizado" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Observación de Normalización]"
+                          dataType="wstr"
+                          length="255"
+                          name="Observación de Normalización" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Fecha de Finalización]"
+                          dataType="dbDate"
+                          name="Fecha de Finalización" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Observación de Finalización]"
+                          dataType="wstr"
+                          length="255"
+                          name="Observación de Finalización" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Estados id]"
+                          dataType="i4"
+                          name="Estados id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Lugar id]"
+                          dataType="i4"
+                          name="Lugar id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Estacion id]"
+                          dataType="i4"
+                          name="Estacion id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Hora Creacion]"
+                          dataType="dbTime2"
+                          name="Hora Creacion" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Local Id]"
+                          dataType="i4"
+                          name="Local Id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Rubro Id]"
+                          dataType="i4"
+                          name="Rubro Id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Creo Id]"
+                          dataType="i4"
+                          name="Creo Id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Se notificó]"
+                          dataType="i4"
+                          name="Se notificó" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Hora Notificacion]"
+                          dataType="dbTime2"
+                          name="Hora Notificacion" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Normalizo id]"
+                          dataType="i4"
+                          name="Normalizo id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Hora Normalizacion]"
+                          dataType="dbTime2"
+                          name="Hora Normalizacion" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Tipo Norm id]"
+                          dataType="i4"
+                          name="Tipo Norm id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Finalizó Id]"
+                          dataType="i4"
+                          name="Finalizó Id" />
+                        <externalMetadataColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB].ExternalColumns[Hora final]"
+                          dataType="dbTime2"
+                          name="Hora final" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB]"
+                      isErrorOut="true"
+                      name="Salida de error de origen de OLE DB">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ID]"
+                          name="ID" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Evento]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Evento]"
+                          name="Evento" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Estados id]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Estados id]"
+                          name="Estados id" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Lugar id]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Lugar id]"
+                          name="Lugar id" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Estacion id]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Estacion id]"
+                          name="Estacion id" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Fecha de Creación]"
+                          dataType="dbDate"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Fecha de Creación]"
+                          name="Fecha de Creación" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Hora Creacion]"
+                          dataType="dbTime2"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Hora Creacion]"
+                          name="Hora Creacion" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Local Id]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Local Id]"
+                          name="Local Id" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Rubro Id]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Rubro Id]"
+                          name="Rubro Id" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Detalle del Reclamo]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Detalle del Reclamo]"
+                          name="Detalle del Reclamo" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Observación GI]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Observación GI]"
+                          name="Observación GI" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Creo Id]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Creo Id]"
+                          name="Creo Id" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Reclamó]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Reclamó]"
+                          name="Reclamó" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Se notificó]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Se notificó]"
+                          name="Se notificó" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Fecha de Notificación]"
+                          dataType="dbDate"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Fecha de Notificación]"
+                          name="Fecha de Notificación" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Hora Notificacion]"
+                          dataType="dbTime2"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Hora Notificacion]"
+                          name="Hora Notificacion" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Normalizo id]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Normalizo id]"
+                          name="Normalizo id" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Fecha de Normalizado]"
+                          dataType="dbDate"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Fecha de Normalizado]"
+                          name="Fecha de Normalizado" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Hora Normalizacion]"
+                          dataType="dbTime2"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Hora Normalizacion]"
+                          name="Hora Normalizacion" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Tipo Norm id]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Tipo Norm id]"
+                          name="Tipo Norm id" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Observación de Normalización]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Observación de Normalización]"
+                          name="Observación de Normalización" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Finalizó Id]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Finalizó Id]"
+                          name="Finalizó Id" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Fecha de Finalización]"
+                          dataType="dbDate"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Fecha de Finalización]"
+                          name="Fecha de Finalización" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Hora final]"
+                          dataType="dbTime2"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Hora final]"
+                          name="Hora final" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Observación de Finalización]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[Observación de Finalización]"
+                          name="Observación de Finalización" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de error de origen de OLE DB].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Tabla datos normalizados\Tarea Flujo de datos.Paths[Salida de origen de OLE DB]"
+                  endId="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB.Inputs[Entrada de destino de OLE DB]"
+                  name="Salida de origen de OLE DB"
+                  startId="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB.Outputs[Salida de origen de OLE DB]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Tabla datos normalizados.PrecedenceConstraints[Restricción]"
+          DTS:CreationName=""
+          DTS:DTSID="{655C60E6-960D-4D84-96B5-CF3A58F52CA1}"
+          DTS:From="Package\Tabla datos normalizados\Tarea Ejecutar SQL"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Restricción"
+          DTS:To="Package\Tabla datos normalizados\Tarea Flujo de datos" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{FBA9BE87-E453-4C05-99B0-BD009AAEDE40}"
+      DTS:From="Package\Limpiar tablas"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\Contenedor de secuencias" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{437F3159-ED7F-4133-963E-42231375B792}"
+      DTS:From="Package\Contenedor de secuencias"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción 1"
+      DTS:To="Package\Tabla datos normalizados" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <AnnotationLayout
+          Text="Crear dimensiones a partir &#xD;&#xA;de la tabla datos limpios"
+          ParentId="Package"
+          Size="161,60"
+          Id="f3981c3c-9c8f-4ffd-b68b-50984ee83767"
+          TopLeft="51,599">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <NodeLayout
+          Size="145,42"
+          Id="Package\Limpiar tablas"
+          TopLeft="62,660" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Contenedor de secuencias\DimEstados"
+          TopLeft="31,8" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Contenedor de secuencias\DimLugares"
+          TopLeft="28,64" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Contenedor de secuencias\DimEstaciones"
+          TopLeft="24,117" />
+        <NodeLayout
+          Size="148,42"
+          Id="Package\Contenedor de secuencias\DimLocal"
+          TopLeft="24,162" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Contenedor de secuencias\DimRubros"
+          TopLeft="31,213" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Contenedor de secuencias\DimCreoGI"
+          TopLeft="30,266" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Contenedor de secuencias\DimLegReclamo"
+          TopLeft="29,322" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Contenedor de secuencias\DimLegNotificado"
+          TopLeft="33,377" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\Contenedor de secuencias\DimLegFinalizo"
+          TopLeft="33,433" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Contenedor de secuencias\Dim Tipo Norm"
+          TopLeft="26,544" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Contenedor de secuencias\DimLegNormalizo"
+          TopLeft="30,494" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="223,641"
+          Size="223,684"
+          Id="Package\Contenedor de secuencias"
+          TopLeft="278,371" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="207,681">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="71,32"
+              Start="0,0"
+              End="63.5,32">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="31.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31.5,0"
+                    Point2="35.5,0"
+                    Point3="35.5,4" />
+                  <mssgle:LineSegment
+                    End="35.5,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35.5,28"
+                    Point2="35.5,32"
+                    Point3="39.5,32" />
+                  <mssgle:LineSegment
+                    End="63.5,32" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Agregar tabla FACT"
+          ParentId="Package"
+          Size="123,60"
+          Id="0e52804b-bf0d-4c3f-af88-606f70c3ebe1"
+          TopLeft="583,569">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Color="#FF000000">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Tabla datos normalizados\Tarea Flujo de datos"
+          TopLeft="33,103" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\Tabla datos normalizados\Tarea Ejecutar SQL"
+          TopLeft="35,25" />
+        <EdgeLayout
+          Id="Package\Tabla datos normalizados.PrecedenceConstraints[Restricción]"
+          TopLeft="120.5,67">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="236,200"
+          Size="236,243"
+          Id="Package\Tabla datos normalizados"
+          TopLeft="558,634" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="501,713">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="57,42.5"
+              Start="0,0"
+              End="49.5,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="24.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.5,0"
+                    Point2="28.5,0"
+                    Point3="28.5,4" />
+                  <mssgle:LineSegment
+                    End="28.5,38.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="28.5,38.5"
+                    Point2="28.5,42.5"
+                    Point3="32.5,42.5" />
+                  <mssgle:LineSegment
+                    End="49.5,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Tabla datos normalizados\Tarea Flujo de datos">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB"
+          TopLeft="158,101" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB"
+          TopLeft="442,101" />
+        <EdgeLayout
+          Id="Package\Tabla datos normalizados\Tarea Flujo de datos.Paths[Salida de origen de OLE DB]"
+          TopLeft="322,122">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="120,0"
+              Start="0,0"
+              End="112.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="112.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tabla datos normalizados\Tarea Flujo de datos\Origen de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Tabla datos normalizados\Tarea Flujo de datos\Destino de OLE DB">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
